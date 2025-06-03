@@ -25,19 +25,19 @@ export default function Product() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.titulo}>🍟 Cardápio</Text>
-            <FlatList
-                data={produtos}
-                renderItem={({ item }) => (
-                    <CardProduct
-                        nome={item.nome}
-                        preco={item.preco}
-                        imagem={item.imagem}
-                    />
-                )}
-                keyExtractor={item => item.id}
-                contentContainerStyle={{ paddingBottom: 20 }}
-            />
+            <Text style={styles.titulo}>ATLETAS</Text>
+                <FlatList 
+                    data={produtos}
+                    renderItem={({ item }) => (
+                        <CardProduct 
+                            nome={item.nome} 
+                            preco={item.preco}
+                            imagem={item.imagem}
+                        />
+                    )}
+                    keyExtractor={item => item.id}
+                    contentContainerStyle={{ paddingBottom: 20 }}
+                />
         </View>
     );
 }
@@ -45,14 +45,15 @@ export default function Product() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f8f9fa',
+        backgroundColor: '#f5bc07',
         paddingTop: 20,
     },
     titulo: {
         fontSize: 28,
         fontWeight: 'bold',
-        color: '#d6001c',
+        color: 'black',
         textAlign: 'center',
         marginBottom: 10,
     },
+    
 });

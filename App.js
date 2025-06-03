@@ -19,6 +19,9 @@ function BottomTabs(){
 
   return(
     <BottomTab.Navigator>
+      <BottomTab.Screen name = "Elenco" component={Produto}
+      options={{tabBarIcon: () => <AntDesign name="shoppingcart" size={24} color="black" />}}
+      />
       <BottomTab.Screen name = "HomeTab" component={Home}
       options={{tabBarIcon: () => <AntDesign name="home" size={24} color="black" />}}
       />
@@ -28,13 +31,9 @@ function BottomTabs(){
       <BottomTab.Screen name = "CountTab" component={Count}
       options={{tabBarIcon: () => <AntDesign name="home" size={24} color="black" />}}
       />
-      <BottomTab.Screen name = "ProductTab" component={Produto}
-      options={{tabBarIcon: () => <AntDesign name="shoppingcart" size={24} color="black" />}}
-      />
       <BottomTab.Screen name = "CadastroProductTab" component={cadastroProduto}
       options={{tabBarIcon: () => <MaterialIcons name="admin-panel-settings" size={24} color="black" />}}
       />
-      
     </BottomTab.Navigator>
   )
 }

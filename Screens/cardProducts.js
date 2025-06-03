@@ -5,7 +5,7 @@ export default function CardProduct({ nome, preco, imagem }) {
         <View style={styles.card}>
             <Image style={styles.img} source={{ uri: imagem }} />
             <Text style={styles.nome}>{nome}</Text>
-            <Text style={styles.txtItem}>R${preco.toFixed(2)}</Text>
+            <Text style={styles.txtItem}>R${preco.toFixed(2)} Mil/ano </Text>
         </View>
     );
 }
@@ -17,6 +17,8 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 10,
         alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     img: {
         width: 60,
