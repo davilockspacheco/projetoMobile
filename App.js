@@ -5,6 +5,7 @@ import Count from "./Screens/count";
 import Produto from "./Screens/produto";
 import Cadastro from "./Screens/Cadastro";
 import cadastroProduto from "./Screens/cadastroProduto";
+import EditarJogador from "./Screens/EditarJogador"; // Nova tela de edição
 
 import 'react-native-gesture-handler';
 import { NavigationContainer } from "@react-navigation/native";
@@ -22,6 +23,7 @@ function BottomTabs(){
       <BottomTab.Screen name = "Elenco" component={Produto}
       options={{tabBarIcon: () => <AntDesign name="shoppingcart" size={24} color="black" />}}
       />
+ 
       <BottomTab.Screen name = "HomeTab" component={Home}
       options={{tabBarIcon: () => <AntDesign name="home" size={24} color="black" />}}
       />
@@ -49,6 +51,7 @@ export default function App() {
         <Stack.Screen name = "TelaCadastro" component={Cadastro}
         options={{tabBarIcon: () => <AntDesign name="home" size={24} color="black" />}}
         />
+        <Stack.Screen name="EditarJogador" component={EditarJogador} />
       </Stack.Navigator>
     </NavigationContainer>
   );

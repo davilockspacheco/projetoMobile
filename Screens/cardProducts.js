@@ -1,41 +1,50 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import React from 'react';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
-export default function CardProduct({ nome, preco, imagem }) {
+export default function CardProduct({ nome, preco, imagem, onPress }) {
     return (
-        <View style={styles.card}>
-            <Image style={styles.img} source={{ uri: imagem }} />
-            <Text style={styles.nome}>{nome}</Text>
-            <Text style={styles.txtItem}>R${preco.toFixed(2)} Mil/ano </Text>
-        </View>
+        <TouchableOpacity style={styles.card} onPress={onPress}>
+            <Image source={{ uri: imagem }} style={styles.imagem} />
+            <View style={styles.info}>
+                <Text style={styles.nome}>{nome}</Text>
+                <Text style={styles.preco}>{preco}</Text>
+            </View>
+        </TouchableOpacity>
     );
 }
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: '#e9ecef',
-        borderRadius: 8,
-        padding: 10,
-        margin: 10,
-        alignItems: 'center',
+        backgroundColor: '#fff',
+        marginHorizontal: 15,
+        marginVertical: 8,
+        borderRadius: 10,
+        padding: 15,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOpacity: 0.1,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 4,
+        elevation: 3,
     },
-    img: {
+    imagem: {
         width: 60,
         height: 60,
-        borderRadius: 4,
-        marginBottom: 10,
+        borderRadius: 30,
+        marginRight: 15,
+    },
+    info: {
+        flex: 1,
     },
     nome: {
         fontSize: 18,
         fontWeight: 'bold',
         color: '#333',
-        textAlign: 'center',
+        marginBottom: 5,
     },
     preco: {
         fontSize: 16,
-        color: '#d6001c',
-        textAlign: 'center',
-        marginTop: 5,
+        color: '#666',
     },
 });

@@ -4,7 +4,7 @@ import CardProduct from './cardProducts';
 import { db } from '../controller';
 import { collection, getDocs } from "firebase/firestore"; 
 
-export default function Product() {
+export default function Product({ navigation }) {
     const [produtos, setProdutos] = useState([]);
 
     useEffect(() => {
@@ -23,6 +23,10 @@ export default function Product() {
         carregarProdutos();
     }, []);
 
+    const handleJogadorPress = (jogadorId) => {
+        navigation.navigate('FeedTab', { jogadorId });
+    };
+
     return (
         <View style={styles.container}>
             <Text style={styles.titulo}>ATLETAS</Text>
@@ -33,6 +37,7 @@ export default function Product() {
                             nome={item.nome} 
                             preco={item.preco}
                             imagem={item.imagem}
+                            onPress={() => handleJogadorPress(item.id)}
                         />
                     )}
                     keyExtractor={item => item.id}
@@ -55,5 +60,4 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 10,
     },
-    
 });
