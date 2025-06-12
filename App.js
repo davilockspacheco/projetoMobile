@@ -4,7 +4,7 @@ import Feed from "./Screens/Feed";
 import Count from "./Screens/count";
 import Produto from "./Screens/produto";
 import Cadastro from "./Screens/Cadastro";
-import cadastroProduto from "./Screens/cadastroProduto";
+import cadastroJogador from "./Screens/cadastroJogador";
 import EditarJogador from "./Screens/EditarJogador"; // Nova tela de edição
 
 import 'react-native-gesture-handler';
@@ -24,7 +24,7 @@ function BottomTabs(){
       options={{tabBarIcon: () => <AntDesign name="shoppingcart" size={24} color="black" />}}
       />
  
-      <BottomTab.Screen name = "HomeTab" component={Home}
+      <BottomTab.Screen name = "HomeScreen" component={Home}
       options={{tabBarIcon: () => <AntDesign name="home" size={24} color="black" />}}
       />
       <BottomTab.Screen name = "FeedTab" component={Feed}
@@ -33,7 +33,7 @@ function BottomTabs(){
       <BottomTab.Screen name = "CountTab" component={Count}
       options={{tabBarIcon: () => <AntDesign name="home" size={24} color="black" />}}
       />
-      <BottomTab.Screen name = "CadastroProductTab" component={cadastroProduto}
+      <BottomTab.Screen name = "CadastroJogadorTab" component={cadastroJogador}
       options={{tabBarIcon: () => <MaterialIcons name="admin-panel-settings" size={24} color="black" />}}
       />
     </BottomTab.Navigator>

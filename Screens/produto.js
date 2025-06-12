@@ -35,7 +35,7 @@ export default function Product({ navigation }) {
                     renderItem={({ item }) => (
                         <CardProduct 
                             nome={item.nome} 
-                            preco={item.preco}
+                            
                             imagem={item.imagem}
                             onPress={() => handleJogadorPress(item.id)}
                         />

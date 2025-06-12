@@ -3,7 +3,7 @@ import { useState } from "react";
 import { db } from '../controller';
 import { collection, addDoc } from "firebase/firestore"; 
 
-export default function CadastroProduto({ navigation }) {
+export default function cadastroJogador({ navigation }) {
     const [nome, setNome] = useState("");
     const [preco, setPreco] = useState("");
     const [imagem, setImagem] = useState("");
