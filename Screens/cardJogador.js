@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
-export default function CardProduct({ nome, preco, imagem, onPress }) {
+export default function CardJogador({ nome, preco, imagem, onPress }) {
     return (
         <TouchableOpacity style={styles.card} onPress={onPress}>
             <Image source={{ uri: imagem }} style={styles.imagem} />

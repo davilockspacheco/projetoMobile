@@ -6,6 +6,7 @@ import Produto from "./Screens/produto";
 import Cadastro from "./Screens/Cadastro";
 import cadastroJogador from "./Screens/cadastroJogador";
 import EditarJogador from "./Screens/EditarJogador"; // Nova tela de edição
+import TelaEscalacao from "./Screens/TelaEscalacao";
 
 import 'react-native-gesture-handler';
 import { NavigationContainer } from "@react-navigation/native";
@@ -35,6 +36,9 @@ function BottomTabs(){
       />
       <BottomTab.Screen name = "CadastroJogadorTab" component={cadastroJogador}
       options={{tabBarIcon: () => <MaterialIcons name="admin-panel-settings" size={24} color="black" />}}
+      />
+      <BottomTab.Screen name = "TelaEscalacaoTab" component={TelaEscalacao}
+      options={{tabBarIcon: () => <MaterialIcons name="input_circle" size={24} color="black" />}}
       />
     </BottomTab.Navigator>
   )

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
-import CardProduct from './cardProducts';
+import CardProduct from './cardJogador';
 import { db } from '../controller';
 import { collection, getDocs } from "firebase/firestore"; 
 
