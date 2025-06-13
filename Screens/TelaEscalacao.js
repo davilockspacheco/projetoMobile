@@ -1,3 +1,4 @@
+// TelaEscalacao.js
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native-web';
 import { collection, getDocs } from 'firebase/firestore';
@@ -5,52 +6,152 @@ import { db } from '../controller';
 
 export default function TelaEscalacao() {
   const [jogadores, setJogadores] = useState([]);
-  const [titulares, setTitulares] = useState([]);
+  const [formacao, setFormacao] = useState('3-2-1'); // nova
+ // Formação padrão inicial
 
   useEffect(() => {
-    async function carregarJogadores() {
-      const querySnapshot = await getDocs(collection(db, 'jogadores'));
-      const lista = [];
-      querySnapshot.forEach(doc => {
-        lista.push({ id: doc.id, ...doc.data() });
-      });
-      setJogadores(lista);
-    }
-    carregarJogadores();
+    const fetchJogadores = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'jogadores'));
+        const jogadoresData = querySnapshot.docs.map(doc => doc.data());
+        setJogadores(jogadoresData);
+      } catch (error) {
+        console.error('Erro ao buscar jogadores:', error);
+      }
+    };
+
+    fetchJogadores();
   }, []);
 
-  const selecionarTitular = (jogador) => {
-    if (titulares.find(j => j.id === jogador.id)) return; // Evita duplicatas
-    if (titulares.length >= 7) return; // Máximo de 7 titulares
-    setTitulares([...titulares, jogador]);
+  // Define as posições fixas no campo para cada formação (em porcentagens)
+// Define as posições fixas no campo para cada formação (em porcentagens)
+  const formacoes = {
+    '3-2-1': [
+      { top: '10%', left: '44.5%' }, // Goleiro
+      { top: '30%', left: '30%' }, // Ala Direito
+      { top: '30%', left: '50%' }, // Zagueiro
+      { top: '30%', left: '70%' }, // Ala Esquerdo
+      { top: '50%', left: '40%' }, // Meio Campo
+      { top: '50%', left: '59%' }, // Meio Campo
+      { top: '70%', left: '50%' }, // Atacante
+    ],
+    '2-3-1': [
+      { top: '10%', left: '44.5%' }, // Goleiro
+      { top: '25%', left: '38%' }, // Zagueiro
+      { top: '25%', left: '60%' }, // Zagueiro
+      { top: '50%', left: '30%' }, // Meio Campo
+      { top: '40%', left: '50%' }, // Volante
+      { top: '50%', left: '70%' }, // Meio Campo
+      { top: '70%', left: '50%' }, // Atacante
+    ],
+    '2-2-2': [
+      { top: '10%', left: '44.5%' }, // Goleiro
+      { top: '30%', left: '40%' }, // Zagueiro
+      { top: '30%', left: '60%' }, // Zagueiro
+      { top: '50%', left: '40%' }, // Meio Campo
+      { top: '50%', left: '60%' }, // Meio Campo
+      { top: '70%', left: '40%' }, // Atacante
+      { top: '70%', left: '60%' }, // Atacante
+    ]
   };
+
+
+  // Define os 7 primeiros jogadores como titulares
+const [titulares, setTitulares] = useState([]);
+
+// Quando carregar os jogadores, definir os 7 primeiros como titulares iniciais
+useEffect(() => {
+  const fetchJogadores = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'jogadores'));
+      const jogadoresData = querySnapshot.docs.map(doc => doc.data());
+      setJogadores(jogadoresData);
+      
+    } catch (error) {
+      console.error('Erro ao buscar jogadores:', error);
+    }
+  };
+
+  fetchJogadores();
+}, []);
+
 
   return (
     <View style={styles.container}>
-      {/* LADO ESQUERDO: CAMPO COM TITULARES */}
-      <View style={styles.ladoEsquerdo}>
-        <Image source={require('../assets/campo_futebol.jpg')} style={styles.fundoCampo} resizeMode="cover" />
-        <View style={styles.overlayCampo}>
-          {titulares.map((jogador, index) => (
-            <View key={jogador.id} style={styles.slotJogador}>
-              <View style={styles.fotoCircular}>
-                {/* imagem temporária */}
-                <Image source={{ uri: jogador.imagem || 'https://via.placeholder.com/100' }} style={styles.imagem} />
-              </View>
-              <Text style={styles.nomeJogador}>{jogador.nome}</Text>
-            </View>
-          ))}
-        </View>
+
+      {/* Parte esquerda: Campo com titulares */}
+      <View style={styles.campoContainer}>
+        <Image
+          source={require('../assets/campo_futebol.jpg')}
+          style={styles.campo}
+          resizeMode="contain"
+        />
+
+        {/* Renderiza cada titular na posição da formação */}
+        {titulares.map((jogador, index) => {
+          const pos = formacoes[formacao][index];
+          return (
+            <TouchableOpacity
+              key={index}
+              style={[styles.jogadorSlot, {
+                top: pos.top,
+                left: pos.left,
+              }]}
+              onPress={() => {
+                // Remove o jogador clicado da lista de titulares
+                setTitulares(titulares.filter(j => j !== jogador));
+              }}
+            >
+              <Image
+                source={{ uri: jogador.imagem || 'https://via.placeholder.com/100' }}
+                style={styles.imagem}
+              />
+              <Text style={styles.nome}>{jogador.nome}</Text>
+            </TouchableOpacity>
+          );
+        })}
+
       </View>
 
-      {/* LADO DIREITO: LISTA DE JOGADORES */}
-      <View style={styles.ladoDireito}>
-        <Text style={styles.titulo}>Selecionar Jogadores</Text>
-        <ScrollView contentContainerStyle={styles.listaJogadores}>
-          {jogadores.map((jogador) => (
-            <TouchableOpacity key={jogador.id} style={styles.cardJogador} onPress={() => selecionarTitular(jogador)}>
-              <Text style={styles.nomeLista}>{jogador.nome} ({jogador.posicao})</Text>
+      {/* Parte direita: Lista de jogadores com seleção de formação */}
+      <View style={styles.listaContainer}>
+        <Text style={styles.titulo}>Formação:</Text>
+        <View style={styles.botoesFormacao}>
+          {Object.keys(formacoes).map(item => (
+            <TouchableOpacity
+              key={item}
+              style={[styles.botaoFormacao, formacao === item && styles.botaoSelecionado]}
+              onPress={() => setFormacao(item)}
+            >
+              <Text style={styles.txtBotao}>{item}</Text>
             </TouchableOpacity>
+          ))}
+        </View>
+
+        <ScrollView style={{ marginTop: 20 }}>
+          {jogadores
+            .filter(jogador => !titulares.includes(jogador)) // Só exibe quem ainda não está no campo
+            .map((jogador, index) => (
+              <TouchableOpacity
+                key={index}
+                style={styles.cardJogador}
+                onPress={() => {
+                  if (titulares.length < 7) {
+                    setTitulares([...titulares, jogador]); // adiciona ao campo
+                  } else {
+                    alert('Limite de 7 jogadores escalados.');
+                  }
+                }}
+              >
+                <Image
+                  source={{ uri: jogador.imagem || 'https://via.placeholder.com/100' }}
+                  style={styles.fotoLista}
+                />
+                <View>
+                  <Text style={styles.nomeLista}>{jogador.nome}</Text>
+                  <Text style={styles.posicaoLista}>{jogador.posicao}</Text>
+                </View>
+              </TouchableOpacity>
           ))}
         </ScrollView>
       </View>
@@ -61,75 +162,93 @@ export default function TelaEscalacao() {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    width: '100vw',
     height: '100vh',
   },
-  ladoEsquerdo: {
-    width: '60%',
-    position: 'relative',
-    justifyContent: 'center',
-    alignItems: 'center',
+  campoContainer: {
+  flex: 1,
+  position: 'relative',
+  backgroundColor: '#0b6623', // cor de fundo caso imagem não carregue
   },
-  fundoCampo: {
-    width: '100%',
-    height: '100%',
+  campo: {
+  width: '100%',
+  height: '100%',
+  resizeMode: 'cover',
+  position: 'absolute',
+  },
+  jogadorSlot: {
     position: 'absolute',
-  },
-  overlayCampo: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
     alignItems: 'center',
-    width: '100%',
-    height: '100%',
-    padding: 20,
-  },
-  slotJogador: {
-    alignItems: 'center',
-    margin: 10,
-  },
-  fotoCircular: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: '#eee',
-    overflow: 'hidden',
-    justifyContent: 'center',
-    alignItems: 'center',
+    transform: [{ translateX: -30 }, { translateY: -30 }],
   },
   imagem: {
-    width: '100%',
-    height: '100%',
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    borderWidth: 2,
+    borderColor: '#fff',
   },
-  nomeJogador: {
-    marginTop: 5,
+  nome: {
+    marginTop: 4,
+    fontSize: 12,
     color: '#fff',
+    textAlign: 'center',
     fontWeight: 'bold',
-    textShadowColor: 'rgba(0,0,0,0.6)',
+    textShadowColor: '#000',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2,
   },
-  ladoDireito: {
+  listaContainer: {
     width: '40%',
-    backgroundColor: '#ddd', // você pode mudar essa cor
     padding: 20,
+    backgroundColor: '#f4f4f4',
   },
   titulo: {
-    fontSize: 22,
+    fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 10,
   },
-  listaJogadores: {
-    paddingBottom: 100,
+  botoesFormacao: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    marginTop: 8,
+  },
+  botaoFormacao: {
+    backgroundColor: '#ccc',
+    padding: 8,
+    borderRadius: 6,
+    marginRight: 8,
+    marginBottom: 8,
+  },
+  botaoSelecionado: {
+    backgroundColor: '#ffc107',
+  },
+  txtBotao: {
+    fontWeight: 'bold',
   },
   cardJogador: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    marginBottom: 12,
     backgroundColor: '#fff',
-    padding: 12,
-    marginBottom: 10,
-    borderRadius: 10,
+    padding: 10,
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
     elevation: 2,
   },
+  fotoLista: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+  },
   nomeLista: {
+    fontWeight: 'bold',
     fontSize: 16,
+  },
+  posicaoLista: {
+    fontSize: 14,
+    color: '#666',
   },
 });
