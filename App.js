@@ -1,5 +1,4 @@
 import Login from "./Screens/Login";
-import Home from "./Screens/Home";
 import Feed from "./Screens/Feed";
 import Count from "./Screens/count";
 import Produto from "./Screens/produto";
@@ -7,7 +6,7 @@ import Cadastro from "./Screens/Cadastro";
 import cadastroJogador from "./Screens/cadastroJogador";
 import EditarJogador from "./Screens/EditarJogador"; // Nova tela de edição
 import TelaEscalacao from "./Screens/TelaEscalacao";
-
+import TelaProximosJogos from "./Screens/TelaJogos";
 import 'react-native-gesture-handler';
 import { NavigationContainer } from "@react-navigation/native";
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
@@ -24,12 +23,11 @@ function BottomTabs(){
       <BottomTab.Screen name = "Elenco" component={Produto}
       options={{tabBarIcon: () => <AntDesign name="shoppingcart" size={24} color="black" />}}
       />
- 
-      <BottomTab.Screen name = "HomeScreen" component={Home}
-      options={{tabBarIcon: () => <AntDesign name="home" size={24} color="black" />}}
-      />
       <BottomTab.Screen name = "FeedTab" component={Feed}
       options={{tabBarIcon: () => <FontAwesome name="feed" size={24} color="black" />}}
+      />
+      <BottomTab.Screen name = "TelaJogos" component={TelaProximosJogos}
+      options={{tabBarIcon: () => <AntDesign name="home" size={24} color="black" />}}
       />
       <BottomTab.Screen name = "CountTab" component={Count}
       options={{tabBarIcon: () => <AntDesign name="home" size={24} color="black" />}}
