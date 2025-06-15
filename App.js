@@ -1,6 +1,5 @@
 import Login from "./Screens/Login";
 import Feed from "./Screens/Feed";
-import Count from "./Screens/count";
 import Produto from "./Screens/produto";
 import Cadastro from "./Screens/Cadastro";
 import cadastroJogador from "./Screens/cadastroJogador";
@@ -27,9 +26,6 @@ function BottomTabs(){
       options={{tabBarIcon: () => <FontAwesome name="feed" size={24} color="black" />}}
       />
       <BottomTab.Screen name = "TelaJogos" component={TelaProximosJogos}
-      options={{tabBarIcon: () => <AntDesign name="home" size={24} color="black" />}}
-      />
-      <BottomTab.Screen name = "CountTab" component={Count}
       options={{tabBarIcon: () => <AntDesign name="home" size={24} color="black" />}}
       />
       <BottomTab.Screen name = "CadastroJogadorTab" component={cadastroJogador}

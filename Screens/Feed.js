@@ -150,7 +150,7 @@ export default function Feed({ route, navigation }) {
         {jogadorId && (
           <TouchableOpacity 
             style={styles.editButton} 
-            onPress={() => navigation.navigate('EditarJogador', { jogador })}
+            onPress={() => navigation.navigate('EditarJogador', { jogadorId })}
           >
             <Text style={styles.editButtonText}>EDITAR ESTATÍSTICAS</Text>
           </TouchableOpacity>

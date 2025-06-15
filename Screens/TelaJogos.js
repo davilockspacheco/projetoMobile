@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#f4f4f4',
+    backgroundColor: '#f5bc07',
   },
   titulo: {
     fontSize: 24,
@@ -109,4 +109,16 @@ const styles = StyleSheet.create({
     color: '#555',
     textAlign: 'center',
   },
+  editButton: {
+    backgroundColor: '#28a745',
+    borderRadius: 8,
+    padding: 12,
+    alignItems: 'center',
+    marginTop: 20,
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
+    elevation: 3,
+  }
 });

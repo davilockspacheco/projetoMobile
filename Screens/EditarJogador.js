@@ -216,58 +216,56 @@ export default function EditarJogador({ route, navigation }) {
 
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Gols</Text>
-            <TextInput
-              style={styles.input}
-              value={jogador.gols}
-              onChangeText={(text) => updateField('gols', text)}
-              placeholder="Gols"
-              keyboardType="numeric"
-            />
+            <View style={styles.counterContainer}>
+              <TouchableOpacity style={styles.counterButton} onPress={() => updateField('gols', Math.max(0, parseInt(jogador.gols) - 1).toString())}>
+                <Text style={styles.counterText}>-</Text>
+              </TouchableOpacity>
+              <Text style={styles.counterNumber}>{jogador.gols}</Text>
+              <TouchableOpacity style={styles.counterButton} onPress={() => updateField('gols', (parseInt(jogador.gols) + 1).toString())}>
+                <Text style={styles.counterText}>+</Text>
+              </TouchableOpacity>
+            </View>
           </View>
 
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Assistências</Text>
-            <TextInput
-              style={styles.input}
-              value={jogador.assistencias}
-              onChangeText={(text) => updateField('assistencias', text)}
-              placeholder="Assistências"
-              keyboardType="numeric"
-            />
-          </View>
-
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>Faltas</Text>
-            <TextInput
-              style={styles.input}
-              value={jogador.faltas}
-              onChangeText={(text) => updateField('faltas', text)}
-              placeholder="Faltas"
-              keyboardType="numeric"
-            />
+            <View style={styles.counterContainer}>
+              <TouchableOpacity style={styles.counterButton} onPress={() => updateField('assistencias', Math.max(0, parseInt(jogador.assistencias) - 1).toString())}>
+                <Text style={styles.counterText}>-</Text>
+              </TouchableOpacity>
+              <Text style={styles.counterNumber}>{jogador.assistencias}</Text>
+              <TouchableOpacity style={styles.counterButton} onPress={() => updateField('assistencias', (parseInt(jogador.assistencias) + 1).toString())}>
+                <Text style={styles.counterText}>+</Text>
+              </TouchableOpacity>
+            </View>
           </View>
 
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Cartões Amarelos</Text>
-            <TextInput
-              style={styles.input}
-              value={jogador.cartoesAmarelos}
-              onChangeText={(text) => updateField('cartoesAmarelos', text)}
-              placeholder="Cartões Amarelos"
-              keyboardType="numeric"
-            />
+            <View style={styles.counterContainer}>
+              <TouchableOpacity style={styles.counterButton} onPress={() => updateField('cartoesAmarelos', Math.max(0, parseInt(jogador.cartoesAmarelos) - 1).toString())}>
+                <Text style={styles.counterText}>-</Text>
+              </TouchableOpacity>
+              <Text style={styles.counterNumber}>{jogador.cartoesAmarelos}</Text>
+              <TouchableOpacity style={styles.counterButton} onPress={() => updateField('cartoesAmarelos', (parseInt(jogador.cartoesAmarelos) + 1).toString())}>
+                <Text style={styles.counterText}>+</Text>
+              </TouchableOpacity>
+            </View>
           </View>
 
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Cartões Vermelhos</Text>
-            <TextInput
-              style={styles.input}
-              value={jogador.cartoesVermelhos}
-              onChangeText={(text) => updateField('cartoesVermelhos', text)}
-              placeholder="Cartões Vermelhos"
-              keyboardType="numeric"
-            />
+            <View style={styles.counterContainer}>
+              <TouchableOpacity style={styles.counterButton} onPress={() => updateField('cartoesVermelhos', Math.max(0, parseInt(jogador.cartoesVermelhos) - 1).toString())}>
+                <Text style={styles.counterText}>-</Text>
+              </TouchableOpacity>
+              <Text style={styles.counterNumber}>{jogador.cartoesVermelhos}</Text>
+              <TouchableOpacity style={styles.counterButton} onPress={() => updateField('cartoesVermelhos', (parseInt(jogador.cartoesVermelhos) + 1).toString())}>
+                <Text style={styles.counterText}>+</Text>
+              </TouchableOpacity>
+            </View>
           </View>
+
 
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Valor</Text>
@@ -371,5 +369,35 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     fontWeight: 'bold'
-  }
+  },
+  counterContainer: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  borderWidth: 1,
+  borderColor: '#ccc',
+  borderRadius: 8,
+  paddingHorizontal: 10,
+  paddingVertical: 8,
+  backgroundColor: '#f9f9f9',
+},
+
+counterButton: {
+  backgroundColor: '#333',
+  borderRadius: 8,
+  paddingVertical: 6,
+  paddingHorizontal: 12,
+},
+
+counterText: {
+  color: '#fff',
+  fontSize: 20,
+  fontWeight: 'bold',
+},
+
+counterNumber: {
+  fontSize: 18,
+  fontWeight: 'bold',
+  color: '#333',
+},
 });
