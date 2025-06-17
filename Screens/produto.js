@@ -24,7 +24,7 @@ export default function Product({ navigation }) {
     }, []);
 
     const handleJogadorPress = (jogadorId) => {
-        navigation.navigate('FeedTab', { jogadorId });
+        navigation.navigate('Estátisticas do Jogador', { jogadorId });
     };
 
     return (
