@@ -23,7 +23,6 @@ export default function TelaEscalacao() {
     fetchJogadores();
   }, []);
 
-  // Define as posições fixas no campo para cada formação (em porcentagens)
 // Define as posições fixas no campo para cada formação (em porcentagens)
   const formacoes = {
     '3-2-1': [
@@ -56,10 +55,9 @@ export default function TelaEscalacao() {
   };
 
 
-  // Define os 7 primeiros jogadores como titulares
+  // Define os 7 jogadores como titulares, mas inicia vazio
 const [titulares, setTitulares] = useState([]);
 
-// Quando carregar os jogadores, definir os 7 primeiros como titulares iniciais
 useEffect(() => {
   const fetchJogadores = async () => {
     try {
@@ -201,6 +199,7 @@ const styles = StyleSheet.create({
     width: '40%',
     padding: 20,
     backgroundColor: '#f4f4f4',
+    backgroundColor: '#f5bc07'
   },
   titulo: {
     fontSize: 18,

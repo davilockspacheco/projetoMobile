@@ -20,19 +20,19 @@ function BottomTabs(){
   return(
     <BottomTab.Navigator>
       <BottomTab.Screen name = "Elenco" component={Produto}
-      options={{tabBarIcon: () => <AntDesign name="shoppingcart" size={24} color="black" />}}
+      options={{tabBarIcon: () => <FontAwesome name="group" size={24} color="black" />}}
       />
-      <BottomTab.Screen name = "FeedTab" component={Feed}
-      options={{tabBarIcon: () => <FontAwesome name="feed" size={24} color="black" />}}
+      <BottomTab.Screen name = "Estátisticas do Jogador" component={Feed}
+      options={{tabBarIcon: () => <FontAwesome name="bar-chart" size={24} color="black" />}}
       />
-      <BottomTab.Screen name = "TelaJogos" component={TelaProximosJogos}
-      options={{tabBarIcon: () => <AntDesign name="home" size={24} color="black" />}}
+      <BottomTab.Screen name = "Jogos" component={TelaProximosJogos}
+      options={{tabBarIcon: () => <FontAwesome name="soccer-ball-o" size={24} color="black" />}}
       />
-      <BottomTab.Screen name = "CadastroJogadorTab" component={cadastroJogador}
-      options={{tabBarIcon: () => <MaterialIcons name="admin-panel-settings" size={24} color="black" />}}
+      <BottomTab.Screen name = "Cadastrar de Jogador" component={cadastroJogador}
+      options={{tabBarIcon: () => <FontAwesome name="user-plus" size={24} color="black" />}}
       />
-      <BottomTab.Screen name = "TelaEscalacaoTab" component={TelaEscalacao}
-      options={{tabBarIcon: () => <MaterialIcons name="input_circle" size={24} color="black" />}}
+      <BottomTab.Screen name = "Escalação" component={TelaEscalacao}
+      options={{tabBarIcon: () => <MaterialIcons name="stadium" size={24} color="black" />}}
       />
     </BottomTab.Navigator>
   )
@@ -43,11 +43,11 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name = "TelaLogin" component={Login}
-        options={{tabBarIcon: () => <AntDesign name="home" size={24} color="black" />}}
+        options={{tabBarIcon: () => <MaterialIcons name="sports_soccer" size={24} color="black" />}}
         />
         <Stack.Screen options = {{headerShown: false}} name ="HomeTab" component= {BottomTabs} />
         <Stack.Screen name = "TelaCadastro" component={Cadastro}
-        options={{tabBarIcon: () => <AntDesign name="home" size={24} color="black" />}}
+        options={{tabBarIcon: () => <MaterialIcons name="hsports_soccer" size={24} color="black" />}}
         />
         <Stack.Screen name="EditarJogador" component={EditarJogador} />
       </Stack.Navigator>
