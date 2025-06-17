@@ -212,14 +212,14 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   botaoFormacao: {
-    backgroundColor: '#ccc',
+    backgroundColor: '#4F4F4F',
     padding: 8,
     borderRadius: 6,
     marginRight: 8,
     marginBottom: 8,
   },
   botaoSelecionado: {
-    backgroundColor: '#ffc107',
+    backgroundColor: '#fff',
   },
   txtBotao: {
     fontWeight: 'bold',
