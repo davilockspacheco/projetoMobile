@@ -84,40 +84,41 @@ export default function EditarJogador({ route, navigation }) {
     }
   };
 
-  const salvarAlteracoes = async () => {
-    try {
-      const dadosAtualizados = {
-        nome: jogador.nome,
-        idade: parseInt(jogador.idade) || 0,
-        posicao: jogador.posicao,
-        altura: parseInt(jogador.altura) || 0,
-        peso: parseInt(jogador.peso) || 0,
-        pePreferencial: jogador.pePreferencial,
-        gols: parseInt(jogador.gols) || 0,
-        assistencias: parseInt(jogador.assistencias) || 0,
-        faltas: parseInt(jogador.faltas) || 0,
-        cartoesAmarelos: parseInt(jogador.cartoesAmarelos) || 0,
-        cartoesVermelhos: parseInt(jogador.cartoesVermelhos) || 0,
-        preco: jogador.preco,
-        imagem: jogador.imagem
-      };
+const salvarAlteracoes = async () => {
+  try {
+    const dadosAtualizados = {
+      nome: jogador.nome,
+      idade: parseInt(jogador.idade) || 0,
+      posicao: jogador.posicao,
+      altura: parseInt(jogador.altura) || 0,
+      peso: parseInt(jogador.peso) || 0,
+      pePreferencial: jogador.pePreferencial,
+      gols: parseInt(jogador.gols) || 0,
+      assistencias: parseInt(jogador.assistencias) || 0,
+      faltas: parseInt(jogador.faltas) || 0,
+      cartoesAmarelos: parseInt(jogador.cartoesAmarelos) || 0,
+      cartoesVermelhos: parseInt(jogador.cartoesVermelhos) || 0,
+      preco: jogador.preco,
+      imagem: jogador.imagem
+    };
 
-      await updateDoc(doc(db, 'produtos', jogadorId), {
-        nome: dadosAtualizados.nome,
-        preco: dadosAtualizados.preco,
-        imagem: dadosAtualizados.imagem
-      });
+    await updateDoc(doc(db, 'produtos', jogadorId), {
+      nome: dadosAtualizados.nome,
+      preco: dadosAtualizados.preco,
+      imagem: dadosAtualizados.imagem
+    });
 
-      await setDoc(doc(db, 'jogadores', jogadorId), dadosAtualizados, { merge: true });
+    await setDoc(doc(db, 'jogadores', jogadorId), dadosAtualizados, { merge: true });
 
-      Alert.alert('Sucesso', 'Dados atualizados com sucesso!', [
-        { text: 'OK', onPress: () => navigation.goBack() }
-      ]);
-    } catch (error) {
-      console.error('Erro ao salvar:', error);
-      Alert.alert('Erro', 'Erro ao salvar alterações');
-    }
-  };
+    navigation.navigate('Estátisticas do Jogador', { jogadorId });
+
+  } catch (error) {
+    console.error('Erro ao salvar:', error);
+    Alert.alert('Erro', 'Erro ao salvar alterações');
+  }
+};
+  
+
 
   const updateField = (field, value) => {
     setJogador(prev => ({
