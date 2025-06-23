@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 8,
+    gap: 3,
   },
   escudo: {
     width: 40,
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
   },
   nomeTime: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 'bold',
   },
   placar: {
