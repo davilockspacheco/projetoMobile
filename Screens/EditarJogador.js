@@ -102,23 +102,27 @@ const salvarAlteracoes = async () => {
       imagem: jogador.imagem
     };
 
+    // Atualiza dados no Firestore - coleção produtos
     await updateDoc(doc(db, 'produtos', jogadorId), {
       nome: dadosAtualizados.nome,
       preco: dadosAtualizados.preco,
       imagem: dadosAtualizados.imagem
     });
 
+    // Atualiza dados na coleção jogadores
     await setDoc(doc(db, 'jogadores', jogadorId), dadosAtualizados, { merge: true });
 
-    navigation.navigate('Estátisticas do Jogador', { jogadorId });
+    // Após salvar, navega direto para Estatísticas do Jogador (Feed) passando o jogadorId
+    navigation.navigate('HomeTab', {
+      screen: 'Estátisticas do Jogador',
+      params: { jogadorId: jogadorId }
+    });
 
   } catch (error) {
     console.error('Erro ao salvar:', error);
     Alert.alert('Erro', 'Erro ao salvar alterações');
   }
 };
-  
-
 
   const updateField = (field, value) => {
     setJogador(prev => ({
